@@ -77,20 +77,28 @@ const Royalcourtqscr = () => {
     }, [selectedRoyalCourtCategory]),
   );
 
-  const getRandomIndex = () => {
-    const index = Math.floor(Math.random() * 5);
+  const filteredRoyalCourtsRddl = royalcourtsrddls.filter(
+    adv => adv.royalcourtcat === selectedRoyalCourtCategory,
+  );
 
+  console.log('filteredRoyalCourtsRddl', filteredRoyalCourtsRddl);
+
+  const getRandomIndex = () => {
+    const index = Math.floor(Math.random() * 40);
     setRandomRoyalCourtIndex(index);
   };
+
+  console.log('randomRoyalCourtIndex', randomRoyalCourtIndex);
 
   const showRiddleRes = () => {
     setIsRoyalCourtEditable(false);
     setIsRoyalCourtLoading(true);
+    // getRandomIndex();
 
     setTimeout(() => {
       setIsRoyalCourtLoading(false);
       setShowRoyalCourtAnsw(true);
-    }, 1500);
+    }, 1000);
   };
 
   const shareRiddleRes = async () => {
@@ -215,7 +223,10 @@ Correct answer: ${royalcourtsrddls[randomRoyalCourtIndex].royalcourtansw}`,
                     </View>
                   </View>
                   <Text style={[styles.royalcourtmdsbt, { marginBottom: 17 }]}>
-                    {royalcourtsrddls[randomRoyalCourtIndex].royalcourtadv}
+                    {
+                      filteredRoyalCourtsRddl[randomRoyalCourtIndex]
+                        .royalcourtadv
+                    }
                   </Text>
 
                   <View
@@ -228,7 +239,7 @@ Correct answer: ${royalcourtsrddls[randomRoyalCourtIndex].royalcourtansw}`,
                         styles.royalcourtinpt,
                         royalCourtInptValue && { fontSize: 15 },
                         showRoyalCourtAnsw
-                          ? royalcourtsrddls[
+                          ? filteredRoyalCourtsRddl[
                               randomRoyalCourtIndex
                             ].royalcourtansw.toLowerCase() ===
                             royalCourtInptValue.toLowerCase()
@@ -292,7 +303,7 @@ Correct answer: ${royalcourtsrddls[randomRoyalCourtIndex].royalcourtansw}`,
                         <View
                           style={[
                             styles.royalcourtcorranswcnt,
-                            royalcourtsrddls[
+                            filteredRoyalCourtsRddl[
                               randomRoyalCourtIndex
                             ].royalcourtansw.toLowerCase() ===
                             royalCourtInptValue.toLowerCase()
@@ -302,7 +313,7 @@ Correct answer: ${royalcourtsrddls[randomRoyalCourtIndex].royalcourtansw}`,
                         >
                           <Text style={styles.royalcourtcorranstxt}>
                             {
-                              royalcourtsrddls[randomRoyalCourtIndex]
+                              filteredRoyalCourtsRddl[randomRoyalCourtIndex]
                                 .royalcourtansw
                             }
                           </Text>
@@ -337,7 +348,7 @@ Correct answer: ${royalcourtsrddls[randomRoyalCourtIndex].royalcourtansw}`,
                           }
                           onPress={() =>
                             handleSaveRoyalRiddle(
-                              royalcourtsrddls[randomRoyalCourtIndex],
+                              filteredRoyalCourtsRddl[randomRoyalCourtIndex],
                             )
                           }
                         />

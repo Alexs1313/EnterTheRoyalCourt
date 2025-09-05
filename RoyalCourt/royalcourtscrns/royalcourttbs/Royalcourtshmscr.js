@@ -46,14 +46,21 @@ const Royalcourtshmscr = () => {
   const [isRoyalCourtSpinning, setIsRoyalCourtSpinning] = useState(false);
   const [toggleButtonColor, setToggleButtonColor] = useState(false);
   const [isVisibleMdl, setIsVisibleMdl] = useState(true);
+  const [randomRoyalCourtIndex, setRandomRoyalCourtIndex] = useState(null);
 
   const filteredRoyalCourtsAdv = royalcourtadvs.filter(
     adv => adv.royalcourtcat === selectedRoyalCourtCategory,
   );
 
-  const randomRoyalCourtIndex = Math.floor(
-    Math.random() * filteredRoyalCourtsAdv.length,
-  );
+  // const randomRoyalCourtIndex = Math.floor(
+  //   Math.random() * filteredRoyalCourtsAdv.length,
+  // );
+
+  const getRandomIndex = () => {
+    const index = Math.floor(Math.random() * filteredRoyalCourtsAdv.length);
+
+    setRandomRoyalCourtIndex(index);
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -80,6 +87,8 @@ const Royalcourtshmscr = () => {
     if (isRoyalCourtSpinning) return;
     setIsRoyalCourtSpinning(true);
     setIsVisibleMdl(true);
+
+    getRandomIndex();
 
     const duration = Math.random() * (8000 - 3000) + 3000;
     const categoryIndex = Math.floor(Math.random() * numCategories);

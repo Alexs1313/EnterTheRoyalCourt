@@ -13,6 +13,7 @@ import Royalcourtmnbtn from '../royalcourtcmpnts/Royalcourtmnbtn';
 import { useCallback, useState } from 'react';
 import { useRoyalCourtStore } from '../royalcourtstr/royalcourtcntx';
 import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Royalcourtriddlecrd = ({ adv }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -23,6 +24,8 @@ const Royalcourtriddlecrd = ({ adv }) => {
 
     deleteRoyalCourtRiddle,
   } = useRoyalCourtStore();
+
+  console.log('adv', adv);
 
   useFocusEffect(
     useCallback(() => {
